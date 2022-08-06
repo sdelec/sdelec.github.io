@@ -1,1 +1,1 @@
-# sdelec.github.io
+# STATIC
