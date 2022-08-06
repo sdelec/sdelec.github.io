@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>导航</title>
+    <base target="_blank"/>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/vue.min.js"></script>
+    <script src="js/index.js"></script><!-- onload() vue() -->
+</head>
+<body>
+    <div class="main">
+        <!--墓碑元素-->
+        <div v-if="display!=true" class="loading">
+            <div class="header"><div class="logo"></div><div class="search"></div></div>
+            <div class="title"></div>
+            <div class="first"><div v-for="item in 8" class="firstitem"></div></div>
+            <div class="second"><div v-for="item in 30" class="seconditem"></div></div>
+            <div class="third"><div v-for="item in 3" class="thirditem"><div class="thirdtitle"></div><hr><div class="thirdval"><a class="thirdlink"v-for="i in 9"></a></div></div></div>
+        </div>
+        <!--以下为基本内容-->
+        <div :class="{'display':display}" class="header">
+            <div class="logo">导航</div>
+            <div class="search">
+                <input type="text" class="searchbar" placeholder="谷歌搜索">
+                <div class="searchbutton"></div>
+            </div>
+        </div>
+        <div :class="{'display':display}" class="title">专业课程</div>
+        <div :class="{'display':display}" class="first">
+            <!-- foreach firstitem -->
+            <a  v-for="item in first" 
+                :href="item[2]"  
+                class="firstitem" 
+                :style="{'background':item[3]!=null?'item[3]':''}"
+            >
+                <div class="firstbgimg" :style="{'backgroundImage':'url('+item[1]+')'}"></div> 
+                <img :src="item[1]">
+                <div class="firsttitle"
+                     :style="{'color':item[3]!=null?'#fff':'#333'}"
+                >{{item[0]}}</div>
+            </a>
+        </div>
+        <div :class="{'display':display}" class="second">
+            <!-- foreach seconditem -->
+            <a  v-for="item in second"
+                :href="item[2]"
+                class="seconditem"
+            >
+                <img v-if="item[1]!=null" :src="item[1]">
+                <div class="secondtitle">{{item[0]}}</div>
+            </a>
+        </div>
+        <div :class="{'display':display}" class="third">
+            <!-- foreach thirditem -->
+            <div v-for="item in third" class="thirditem">
+                <div class="thirdtitle">{{item.name}}</div>
+                <hr>
+                <div class="thirdval">
+                    <!-- foreach thirditem->thirdlink -->
+                    <a  class="thirdlink"
+                        v-for="i in item.val"
+                        :href="i[1]"
+                        :style="{'color':i[2]!=null?i[2]:''}"
+                    >
+                        {{i[0]}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
